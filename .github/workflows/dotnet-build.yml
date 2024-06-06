@@ -1,0 +1,45 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 * * * *'  # Executa a cada hora
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2  # Ação pré-existente do GitHub para fazer o checkout do repositório
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      - name: List repository files
+        run: |
+          echo "Listing files in the repository:"
+          ls -la
+          cat .gitignore
+          cat LICENSE
+          cat README.md
+          cat meuarquivo.txt
+
+      - name: Run custom script
+        run: |
+          echo "Running custom script..."
+          # Adicione seu script personalizado aqui
+          # Por exemplo, um script que exibe a data e hora atuais
+          date
+
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          # Adicione aqui o comando para rodar seus testes
+          # Por exemplo, para um projeto Node.js você pode usar:
+          # npm install
+          # npm test
